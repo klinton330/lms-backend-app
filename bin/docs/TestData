@@ -1,0 +1,14 @@
+test data
+
+Admin
+{
+    "username":"Kavin@gmail.com",
+    "password":"207247"
+}
+
+
+User
+{
+    "username":"jervis@gmail.com",
+    "password":"197817"
+}
