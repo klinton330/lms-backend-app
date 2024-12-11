@@ -31,8 +31,8 @@ public class EmployeeController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> postEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO) {
 		employeeService.postEmployee(employeeRequestDTO);
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(new ResponseDTO(EmployeeConstants.STATUS_201, EmployeeConstants.STATUS_201_MESSAGE));
+		return ResponseEntity.status(HttpStatus.CREATED).
+				body(new ResponseDTO(EmployeeConstants.STATUS_201, EmployeeConstants.STATUS_201_MESSAGE));
 
 	}
 

@@ -28,12 +28,12 @@ public class WebConfig {
 	AuthenticationEntryPoint authenticationEntryPoint;
 	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	 PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-	public DaoAuthenticationProvider daoAuthenticationProvider() {
+	DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsServiceImpl);
 		authProvider.setPasswordEncoder(passwordEncoder());
@@ -47,7 +47,7 @@ public class WebConfig {
 	}
 	
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**","/api/v1/password/**").permitAll()
@@ -59,7 +59,7 @@ public class WebConfig {
 	}
 
 	@Bean
-	public AuthTokenFilter authenticationJwtTokenFilter() {
+	 AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
 	}
 
