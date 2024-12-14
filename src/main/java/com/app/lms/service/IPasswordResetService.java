@@ -9,8 +9,8 @@ public interface IPasswordResetService {
 
 	public void createPasswordResetTokenForUser(Employee employee, String token);
 
-	public Employee validatePasswordResetToken(String token);
+	public boolean  validatePasswordResetToken(String token);
 
-	public void changeUserPassword(Employee employee, String newPassword);
+	public void changeUserPassword(String token,String newPassword);
 
 }
