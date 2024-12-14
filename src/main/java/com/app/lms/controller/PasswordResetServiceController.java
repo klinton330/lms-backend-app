@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,12 +34,19 @@ public class PasswordResetServiceController {
 	@PostMapping("/forgot")
 	public ResponseEntity<ResponseDTO> createToken(@RequestParam String email) {
 		Employee employee = employeeService.getEmployeeData(email);
-		System.out.println("Employe Name:"+employee.getEmail()+" "+employee.getEmployeeName());
+		System.out.println("Employe Name:" + employee.getEmail() + " " + employee.getEmployeeName());
 		String token = UUID.randomUUID().toString();
-	passwordResetService.createPasswordResetTokenForUser(employee, token);
-		String resetUrl = "http://localhost:8080/api/v1/password/reset?token=" + token;
+		passwordResetService.createPasswordResetTokenForUser(employee, token);
+		String resetUrl = "http://localhost:9090/api/v1/password/reset?token=" + token;
 		emailService.sendResetTokenURL(resetUrl, "klintonece@gmail.com", employee.getEmployeeName());
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseDTO(EmployeeConstants.STATUS_200, EmployeeConstants.STATUS_RESET_LINK_MESSAGE));
+	}
+
+	@PutMapping("/reset")
+	public ResponseEntity<ResponseDTO> passwordReset(@RequestParam String token,@RequestParam String password) {
+		passwordResetService.changeUserPassword(token, password);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseDTO(EmployeeConstants.STATUS_200, "Password has been changed successfully"));
 	}
 }

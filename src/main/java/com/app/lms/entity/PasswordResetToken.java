@@ -1,8 +1,10 @@
 package com.app.lms.entity;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,24 +25,19 @@ public class PasswordResetToken {
 	@OneToOne(targetEntity = Employee.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "emp_id")
 	private Employee employee;
-	private Date expiryDate;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime tokenCreationDate;
 
 	public PasswordResetToken(String token, Employee employee) {
 		super();
 		this.token = token;
 		this.employee = employee;
-		this.expiryDate = calculateExpiryDate(24 * 60);
+		//this.expiryDate = calculateExpiryDate(24 * 60);
 	}
 
 	public PasswordResetToken() {
 		super();
 	}
 
-	private Date calculateExpiryDate(int expiryTimeInMinutes) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
-		return calendar.getTime();
-	}
 
 }

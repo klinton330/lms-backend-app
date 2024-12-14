@@ -50,7 +50,7 @@ public class WebConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**","/api/v1/password/**").permitAll()
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**","/api/v1/password/**","/api/v1/password/reset/**").permitAll()
 						.anyRequest().authenticated());
 		http.authenticationProvider(daoAuthenticationProvider());
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Override
 	public void postEmployee(EmployeeRequestDTO employeeRequestDTO) {
 		String password = ProjectUtils.generatePassword();
-		System.out.println("Password:"+password);
+		//System.out.println("Password:"+password);
 		String encodedPassword=passwordEncoder.encode(password);
 		employeeRequestDTO.setPassword(encodedPassword);
 		if(employeeRequestDTO.getManagerid()==1)
@@ -114,7 +114,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public Employee getEmployeeData(String email) {
-		Employee employee=employeeRespository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("Email Id Not found in DB"));
+		Employee employee=employeeRespository.findByEmail(email)
+				.orElseThrow(()->new ResourceNotFoundException("Email Id Not found in DB"));
 		return employee;
 	}
 
