@@ -31,4 +31,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<ErrorDTO> createInvalidLeaveTypeException(InvalidLeaveTypeException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDTO(HttpStatus.BAD_REQUEST, e.getMessage()));
 	}
+	
+	@ExceptionHandler(LeaveBalanceExistsException.class)
+	public ResponseEntity<ErrorDTO> createLeaveBalanceExistsException(LeaveBalanceExistsException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDTO(HttpStatus.BAD_REQUEST, e.getMessage()));
+	}
 }

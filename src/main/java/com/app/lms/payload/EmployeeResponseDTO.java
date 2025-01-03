@@ -1,5 +1,7 @@
 package com.app.lms.payload;
 
+import java.util.List;
+
 import com.app.lms.entity.Department;
 import com.app.lms.entity.Manager;
 import com.app.lms.entity.Role;
@@ -21,4 +23,5 @@ public class EmployeeResponseDTO {
 	private Role role;
 	private Manager manager;
 	private Department department;
+	List<EmployeeForLeaveBalance>leavebalance;
 }
