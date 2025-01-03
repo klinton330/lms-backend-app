@@ -23,10 +23,10 @@ public class LeaveBalanceController {
 
 	@Autowired
 	private ILeaveBalance leaveBalance;
-	
+
 	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<ResponseDTO> postLeavebalance(@RequestBody LeaveBalanceRequestDTO leaveBalanceRequestDTO){
+	public ResponseEntity<ResponseDTO> postLeavebalance(@RequestBody LeaveBalanceRequestDTO leaveBalanceRequestDTO) {
 		leaveBalance.postLeaveBalance(leaveBalanceRequestDTO);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(new ResponseDTO(LeaveBalanceConstants.STATUS_201, LeaveBalanceConstants.STATUS_201_MESSAGE));
@@ -34,13 +34,14 @@ public class LeaveBalanceController {
 
 	@PutMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<ResponseDTO>updateLeavebalance(@RequestParam Long id,@RequestBody LeaveBalanceRequestDTO leaveBalanceRequestDTO){
-		boolean isUpdated=leaveBalance.updateLeaveBalance(id, leaveBalanceRequestDTO);
-		if(isUpdated)
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseDTO(LeaveBalanceConstants.STATUS_200, LeaveBalanceConstants.STATUS_200_MESSAGE));
+	public ResponseEntity<ResponseDTO> updateLeavebalance(@RequestParam Long id,
+			@RequestBody LeaveBalanceRequestDTO leaveBalanceRequestDTO) {
+		boolean isUpdated = leaveBalance.updateLeaveBalance(id, leaveBalanceRequestDTO);
+		if (isUpdated)
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseDTO(LeaveBalanceConstants.STATUS_200, LeaveBalanceConstants.STATUS_200_MESSAGE));
 		else
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(new ResponseDTO(LeaveTypeConstants.STATUS_500, LeaveTypeConstants.STATUS_500_MESSAGE));
 	}
 }
