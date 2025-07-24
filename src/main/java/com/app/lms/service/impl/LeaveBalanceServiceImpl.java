@@ -52,8 +52,9 @@ public class LeaveBalanceServiceImpl implements ILeaveBalance {
 		LeaveBalance leaveBalance = leaveBalanceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
 				"Employee Not found with id:" + leaveBalanceRequestDTO.getEmployeeid()));
 		leaveBalance.setAvailableDays(leaveBalanceRequestDTO.getAvailabledays());
-        if(leaveBalanceRequestDTO.getAvailabledays()==leaveBalance.getAvailableDays())
-        	return true;
+		//System.out.println(leaveBalanceRequestDTO.getAvailabledays()+"-----"+ leaveBalance.getAvailableDays());
+//        if(leaveBalanceRequestDTO.getAvailabledays()==leaveBalance.getAvailableDays())
+//        	return true;
 		leaveBalanceRepository.save(leaveBalance);
 		isUpdated = true;
 		return isUpdated;
