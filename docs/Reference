@@ -1,3 +1,11 @@
-Forgot Password Functionality
+Reference
+---------
 
+Forgot Password Functionality
 https://github.com/pratikshakh01/forgotPassword
+
+
+Key Notes
+---------
+JWT token Expire in 5 mins
+Password reset token Expires in 30 minutes
