@@ -2,7 +2,7 @@ package com.app.lms.constants;
 
 public class EmailConstants {
 	public static final String USERNAME="klintonaws@gmail.com";
-    public static final String PASSWORD="junxhnujbdevlbis";
+    public static final String PASSWORD="nkzobjjbsxjrzhtm";
     public static final String EMAIL_SUBJECT="Password for LMS";
     public static final String RESET_LINK_SUBJECT="Reset Link for Password Reset";
     public static final String HOST="mail.smtp.host";
