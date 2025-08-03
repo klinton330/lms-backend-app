@@ -1,11 +1,15 @@
 package com.app.lms.entity;
 
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -21,4 +25,6 @@ public class LeaveType {
 	private String description;
 	@Column(name = "max_days")
 	private int maxDays;
+	@OneToMany(mappedBy = "leaveType",cascade = CascadeType.PERSIST, orphanRemoval = false)
+	List<LeaveRequest>leaveRequests;
 }

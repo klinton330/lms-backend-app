@@ -25,6 +25,11 @@ public class Manager {
 	private String email;
 	@JsonIgnore
 	@OneToMany(mappedBy = "manager",cascade = CascadeType.PERSIST, orphanRemoval = false)
-	//@OnDelete(action = OnDeleteAction.SET_NULL)
 	private List<Employee>employee;
+	@JsonIgnore
+	@OneToMany(mappedBy = "manager",cascade = CascadeType.PERSIST, orphanRemoval = false)
+	private List<LeaveRequest>leaveRequests;
+	@JsonIgnore
+	@OneToMany(mappedBy = "manager",cascade = CascadeType.PERSIST, orphanRemoval = false)
+	private List<LeaveApproval>leaveApprovals;
 }
