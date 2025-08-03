@@ -22,3 +22,13 @@ User
     "password":"aravind@330"
 }
 
+user
+"email":"vijayakumar@gmail.com",
+"pass": ""vijayakumar"
+
+
+ADMIN
+{
+    "username":"testadmin@gmail.com",
+    "password":"testadmin"
+}
