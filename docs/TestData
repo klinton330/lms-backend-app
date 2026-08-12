@@ -1,24 +1,18 @@
-test data
+
+Accounts
+
+{
+    "username":"belson@gmail.com",
+    "password":"belson@330"
+}
+
+{
+    "username":"sachin@gmail.com",
+    "password":"sachin@330"
+}
 
 Admin
 {
-    "username":"Kavin@gmail.com",
-    "password":"207247"
+    "username":"klintonece@gmail.com",
+    "password":"637828"
 }
-
-{
-    "username":"senthil@gmail.com",
-    "password":"senthil@330"
-}
-
-
-User
-{
-    "username":"jervis@gmail.com",
-    "password":"197817"
-}
-{
-    "username":"aravind@gmail.com",
-    "password":"aravind@330"
-}
-

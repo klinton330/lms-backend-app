@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.lms.constants.LeaveBalanceConstants;
 import com.app.lms.constants.LeaveTypeConstants;
+import com.app.lms.exception.GlobalExceptionHandler;
 import com.app.lms.payload.LeaveBalanceRequestDTO;
 import com.app.lms.payload.ResponseDTO;
 import com.app.lms.service.ILeaveBalance;
@@ -21,8 +23,17 @@ import com.app.lms.service.ILeaveBalance;
 @RequestMapping("/api/v1/leavebalance")
 public class LeaveBalanceController {
 
+    private final GlobalExceptionHandler globalExceptionHandler;
+
+    private final DaoAuthenticationProvider daoAuthenticationProvider;
+
 	@Autowired
 	private ILeaveBalance leaveBalance;
+
+    LeaveBalanceController(DaoAuthenticationProvider daoAuthenticationProvider, GlobalExceptionHandler globalExceptionHandler) {
+        this.daoAuthenticationProvider = daoAuthenticationProvider;
+        this.globalExceptionHandler = globalExceptionHandler;
+    }
 
 	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -36,7 +47,9 @@ public class LeaveBalanceController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> updateLeavebalance(@RequestParam Long id,
 			@RequestBody LeaveBalanceRequestDTO leaveBalanceRequestDTO) {
-		boolean isUpdated = leaveBalance.updateLeaveBalance(id, leaveBalanceRequestDTO);
+		boolean isUpdated = leaveBalance.updateLeaveBalance(id, leaveBalanceRequestDTO.getLeavetypeid(),
+				leaveBalanceRequestDTO.getAvailabledays());
+		System.out.println("isup:"+isUpdated);
 		if (isUpdated)
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new ResponseDTO(LeaveBalanceConstants.STATUS_200, LeaveBalanceConstants.STATUS_200_MESSAGE));

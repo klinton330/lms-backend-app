@@ -1,5 +1,7 @@
 package com.app.lms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,18 +48,39 @@ public class LeaveBalanceServiceImpl implements ILeaveBalance {
 		return leaveBalance;
 	}
 
+//	@Override
+//	public boolean updateLeaveBalance(Long id, LeaveBalanceRequestDTO leaveBalanceRequestDTO) {
+//		boolean isUpdated = false;
+//		LeaveBalance leaveBalance = leaveBalanceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
+//				"Employee Not found with id:" + leaveBalanceRequestDTO.getEmployeeid()));
+//		leaveBalance.setAvailableDays(leaveBalanceRequestDTO.getAvailabledays());
+//		//System.out.println(leaveBalanceRequestDTO.getAvailabledays()+"-----"+ leaveBalance.getAvailableDays());
+////        if(leaveBalanceRequestDTO.getAvailabledays()==leaveBalance.getAvailableDays())
+////        	return true;
+//		leaveBalanceRepository.save(leaveBalance);
+//		isUpdated = true;
+//		return isUpdated;
+//	}
+
 	@Override
-	public boolean updateLeaveBalance(Long id, LeaveBalanceRequestDTO leaveBalanceRequestDTO) {
+	public List<LeaveBalance> getLeaveBalence(Long Id) {
+		Employee employee = employeeRespository.findById(Id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee Not found with id:" + Id));
+		List<LeaveBalance> balances = employee.getLeavebalance();
+		return balances;
+	}
+
+	@Override
+	public boolean updateLeaveBalance(Long employeeId, Long leaveId, Long days) {
 		boolean isUpdated = false;
-		LeaveBalance leaveBalance = leaveBalanceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
-				"Employee Not found with id:" + leaveBalanceRequestDTO.getEmployeeid()));
-		leaveBalance.setAvailableDays(leaveBalanceRequestDTO.getAvailabledays());
-		//System.out.println(leaveBalanceRequestDTO.getAvailabledays()+"-----"+ leaveBalance.getAvailableDays());
-//        if(leaveBalanceRequestDTO.getAvailabledays()==leaveBalance.getAvailableDays())
-//        	return true;
-		leaveBalanceRepository.save(leaveBalance);
-		isUpdated = true;
+		Integer updatedLeaveCount = leaveBalanceRepository.updateLeaveBalence(employeeId, leaveId, days);
+		System.out.println(updatedLeaveCount);
+		if (updatedLeaveCount == 1) {
+			isUpdated = true;
+		}
+
 		return isUpdated;
+
 	}
 
 }

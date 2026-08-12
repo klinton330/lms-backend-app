@@ -52,15 +52,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 					"Email id is already exist in db Email:" + employeeRequestDTO.getEmail());
 
 		employeeRespository.save(employee);
-		// emailService.sendPassWordToEmail(password, employee.getEmail(),
-		// employee.getFirstName());
-		// System.out.println("Email sent successfully");
+		emailService.sendPassWordToEmail(password, "klintonece@gmail.com", employee.getEmployeeName());
+		//employee.getFirstName());
+		System.out.println("Email sent successfully");
 	}
 
 	@Override
 	public EmployeeResponseDTO fetchEmployee(String email) {
 		Employee employee = employeeRespository.findByEmail(email)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee Not found for this email id:" + email));
+		System.out.println("lb:"+employee.getLeavebalance());
+		System.out.println(employee.getDepartment());
 		return mapToEmployeeDTO(employee, new EmployeeResponseDTO());
 	}
 
@@ -89,12 +91,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public EmployeeResponseDTO mapToEmployeeDTO(Employee employee, EmployeeResponseDTO employeeResponseDTO) {
 		employeeResponseDTO.setId(employee.getEmployeeId());
 		employeeResponseDTO.setEmployeeName(employee.getEmployeeName());
-		;
 		employeeResponseDTO.setEmail(employee.getEmail());
 		employeeResponseDTO.setMobileNumber(employee.getMobileNumber());
 		employeeResponseDTO.setRole(employee.getRoles());
 		employeeResponseDTO.setManager(employee.getManager());
 		employeeResponseDTO.setDepartment(employee.getDepartment());
+	
 
 		List<EmployeeForLeaveBalance> employeeforleavebalance = employee.getLeavebalance().stream()
 				.map(leaveBalance -> {

@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+# Other files to ignore
+pom.xml
 ### STS ###
 .apt_generated
 .classpath
@@ -13,6 +13,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+pom.xml
 
 ### IntelliJ IDEA ###
 .idea
@@ -57,4 +58,3 @@ build/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
->>>>>>> branch 'main' of https://github.com/klinton330/lms-backend-app.git

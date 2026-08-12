@@ -1,17 +1,16 @@
 package com.app.lms.entity;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -22,8 +21,9 @@ public class PasswordResetToken {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String token;
-	@OneToOne(targetEntity = Employee.class, fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false, name = "emp_id")
+	@ManyToOne
+	@JoinColumn(name = "emp_id", nullable = false)
+	@JsonIgnore
 	private Employee employee;
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime tokenCreationDate;

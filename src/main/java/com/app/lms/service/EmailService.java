@@ -40,12 +40,11 @@ public class EmailService {
 		}
 	}
 
-	/*
-	 * public void sendPassWordToEmail(String password, String to, String firstName)
-	 * { String sub = EmailConstants.EMAIL_SUBJECT; String msg = "Hello " +
-	 * firstName + ",\n\n Your Password for LMS is: " + password + "\n\n LMS Team";
-	 * // send(password, to, sub, msg); }
-	 */
+	public void sendPassWordToEmail(String password, String to, String firstName) {
+		String sub = EmailConstants.EMAIL_SUBJECT;
+		String msg = "Hello " + firstName + ",\n\n Your Password for LMS is: " + password + "\n\n LMS Team";
+		send(to, sub, msg);
+	}
 
 	public void sendResetTokenURL(String resetURL, String to, String firstName) {
 		String sub = EmailConstants.RESET_LINK_SUBJECT;
